@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Successfully Listed - PincodeAds</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+        }
+        
+        .email-wrapper {
+            width: 100%;
+            background-color: #f4f4f4;
+            padding: 20px 0;
+        }
+        
+        .email-container {
+            width: 600px;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4A00E0 0%, #007BFF 100%);
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .logo {
+            background-color: #ffffff;
+            color: #4A00E0;
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .success-icon {
+            background-color: #ffffff;
+            color: #28a745;
+            padding: 15px;
+            border-radius: 50%;
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .main-content {
+            padding: 40px 40px 30px 40px;
+        }
+        
+        .greeting {
+            color: #333333;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0 0 15px 0;
+            text-align: center;
+            line-height: 1.3;
+        }
+        
+        .main-headline {
+            color: #333333;
+            font-size: 26px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0 0 25px 0;
+            line-height: 1.3;
+            text-align: center;
+        }
+        
+        .business-name {
+            color: #4A00E0;
+            font-weight: bold;
+        }
+        
+        .description {
+            color: #555555;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+            padding-bottom: 30px;
+        }
+        
+        .description p {
+            margin: 0 0 15px 0;
+        }
+        
+        .description p:last-child {
+            margin: 0;
+        }
+        
+        .benefits-section {
+            background-color: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .benefits-title {
+            color: #333333;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 20px 0;
+            line-height: 1.3;
+        }
+        
+        .benefits-list {
+            color: #555555;
+            font-size: 15px;
+            line-height: 1.6;
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .benefit-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .benefit-item:last-child {
+            border-bottom: none;
+        }
+        
+        .benefit-icon {
+            color: #28a745;
+            font-weight: bold;
+            display: inline-block;
+            width: 20px;
+        }
+        
+        .cta-section {
+            padding: 30px 40px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #4A00E0 0%, #007BFF 100%);
+            border-radius: 8px;
+            text-align: center;
+            display: inline-block;
+            margin: 0 0 20px 0;
+            box-shadow: 0 4px 12px rgba(74, 0, 224, 0.3);
+        }
+        
+        .cta-button a {
+            display: inline-block;
+            padding: 16px 32px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(74, 0, 224, 0.4);
+        }
+        
+        .secondary-cta {
+            background-color: #ffffff;
+            border: 2px solid #4A00E0;
+            border-radius: 8px;
+            text-align: center;
+            display: inline-block;
+            margin: 0 10px;
+        }
+        
+        .secondary-cta a {
+            display: inline-block;
+            padding: 14px 28px;
+            color: #4A00E0;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 6px;
+        }
+        
+        .management-note {
+            color: #666666;
+            font-size: 14px;
+            margin: 25px 0 0 0;
+            line-height: 1.5;
+            text-align: center;
+        }
+        
+        .stats-section {
+            background-color: #f8f9fa;
+            padding: 25px 40px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .stats-title {
+            color: #333333;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 0 15px 0;
+        }
+        
+        .stats-grid {
+            display: inline-block;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .stat-item {
+            display: inline-block;
+            width: 30%;
+            text-align: center;
+            margin: 0 1.5%;
+            vertical-align: top;
+        }
+        
+        .stat-number {
+            color: #4A00E0;
+            font-size: 24px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #666666;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .disclaimer-section {
+            padding: 25px 40px;
+            background-color: #ffffff;
+            text-align: center;
+            border-top: 1px solid #eeeeee;
+        }
+        
+        .disclaimer-text {
+            color: #999999;
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .footer {
+            background-color: #333333;
+            padding: 25px 40px;
+            text-align: center;
+        }
+        
+        .footer-title {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .footer-subtitle {
+            color: #cccccc;
+            font-size: 13px;
+            margin: 5px 0 20px 0;
+        }
+        
+        .footer-contact {
+            color: #cccccc;
+            font-size: 13px;
+            line-height: 1.5;
+            text-align: center;
+            padding-bottom: 15px;
+        }
+        
+        .footer-contact p {
+            margin: 0 0 8px 0;
+        }
+        
+        .footer-contact p:last-child {
+            margin: 0;
+        }
+        
+        .footer-links {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid #555555;
+        }
+        
+        .footer-links p {
+            color: #999999;
+            font-size: 12px;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        .footer-links a {
+            color: #4A00E0;
+            text-decoration: underline;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            
+            .header,
+            .main-content,
+            .benefits-section,
+            .cta-section,
+            .stats-section,
+            .disclaimer-section,
+            .footer {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+            
+            .main-headline {
+                font-size: 22px !important;
+            }
+            
+            .greeting {
+                font-size: 18px !important;
+            }
+            
+            .cta-button a {
+                padding: 14px 24px !important;
+                font-size: 15px !important;
+            }
+            
+            .secondary-cta {
+                margin: 10px 0 !important;
+                display: block !important;
+            }
+            
+            .stat-item {
+                width: 45% !important;
+                margin: 10px 2.5% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <table class="email-wrapper" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td align="center">
+                <table class="email-container" cellpadding="0" cellspacing="0" border="0">
+                    <!-- Header with Logo -->
+                    <tr>
+                        <td class="header">
+                            <div class="logo">
+                                PincodeAds
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Main Content -->
+                    <tr>
+                        <td class="main-content">
+                            <h2 class="greeting" id="business-owner-greeting">Hi ${businessOwnerName},</h2>
+                            <h1 class="main-headline">Your Business Has Been Successfully Listed!</h1>
+                            
+                            <div class="description">
+                                <p>Your listing for <span class="business-name" id="business-name-display">${businessName}</span> is now live on PincodeAds and visible to users in your area. Start getting discovered by new customers today!</p>
+                                <p>Your business is now part of our growing network of local service providers, ready to connect with customers who need your services.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Benefits Section -->
+                    <tr>
+                        <td class="benefits-section">
+                            <h2 class="benefits-title">What This Means for Your Business</h2>
+                            
+                            <div class="benefits-list">
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">✓</span> Your business is now searchable by location and services
+                                </div>
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">✓</span> Customers can view your profile and contact information
+                                </div>
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">✓</span> You'll start receiving booking requests and inquiries
+                                </div>
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">✓</span> Your listing appears in relevant local searches
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- CTA Section -->
+                    <tr>
+                        <td class="cta-section">
+                            <div class="cta-button">
+                                <a href="https://pincodeads.com/business/listing/${businessId}" id="view-listing-link">View My Listing</a>
+                            </div>
+                            
+                            <div class="secondary-cta">
+                                <a href="https://pincodeads.com/dashboard" id="dashboard-link">Go to Dashboard</a>
+                            </div>
+                            
+                            <p class="management-note">You can manage or update your listing anytime from your dashboard. Add photos, update hours, or modify your services to attract more customers.</p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Stats Section -->
+                    <tr>
+                        <td class="stats-section">
+                            <h3 class="stats-title">Join Our Growing Community</h3>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-number">50K+</span>
+                                    <span class="stat-label">Active Users</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">200K+</span>
+                                    <span class="stat-label">Monthly Searches</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">100+</span>
+                                    <span class="stat-label">Service Categories</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Disclaimer Section -->
+                    <tr>
+                        <td class="disclaimer-section">
+                            <p class="disclaimer-text">
+                                Your listing is subject to our community guidelines and terms of service. To maintain quality standards, we may review and moderate listings as needed.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td class="footer">
+                            <h3 class="footer-title">PincodeAds Business</h3>
+                            <p class="footer-subtitle">Your Local Business Growth Partner</p>
+                            
+                            <div class="footer-contact">
+                                <p><strong>Business Support</strong><br>
+                                Email: business@pincodeads.com<br>
+                                Phone: +91 (800) 456-7890</p>
+                                <p>We're here to help your business succeed!</p>
+                            </div>
+                            
+                            <div class="footer-links">
+                                <p>© 2025 PincodeAds. All rights reserved.<br>
+                                <a href="#" id="unsubscribe-link">Unsubscribe</a> | 
+                                <a href="#" id="privacy-link">Privacy Policy</a> | 
+                                <a href="#" id="business-help-link">Business Help Center</a></p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

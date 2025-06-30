@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to PincodeAds - Start Your Local Advertising Journey</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+        }
+        
+        .email-wrapper {
+            width: 100%;
+            background-color: #f4f4f4;
+            padding: 20px 0;
+        }
+        
+        .email-container {
+            width: 600px;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .logo {
+            background-color: #ffffff;
+            color: #6366f1;
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .main-content {
+            padding: 40px 40px 30px 40px;
+        }
+        
+        .greeting {
+            color: #333333;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 15px 0;
+            text-align: center;
+            line-height: 1.3;
+        }
+        
+        .main-headline {
+            color: #333333;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0 0 30px 0;
+            line-height: 1.3;
+            text-align: center;
+        }
+        
+        .description {
+            color: #555555;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+            padding-bottom: 30px;
+        }
+        
+        .description p {
+            margin: 0 0 20px 0;
+        }
+        
+        .description p:last-child {
+            margin: 0;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            border-radius: 6px;
+            text-align: center;
+            display: inline-block;
+        }
+        
+        .cta-button a {
+            display: inline-block;
+            padding: 15px 30px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+        }
+        
+        .support-text {
+            color: #666666;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .features-section {
+            background-color: #f8f9fa;
+            padding: 30px 40px;
+        }
+        
+        .features-title {
+            color: #333333;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 20px 0;
+            line-height: 1.3;
+            text-align: center;
+        }
+        
+        .features-grid {
+            display: table;
+            width: 100%;
+        }
+        
+        .feature-item {
+            display: table-cell;
+            width: 33.33%;
+            padding: 10px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            line-height: 50px;
+            text-align: center;
+            margin: 0 auto 15px auto;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        
+        .feature-icon.target {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        }
+        
+        .feature-icon.campaign {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        .feature-icon.analytics {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        .feature-title {
+            color: #333333;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+        
+        .feature-description {
+            color: #666666;
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        .benefits-section {
+            padding: 30px 40px;
+            background-color: #ffffff;
+        }
+        
+        .benefits-title {
+            color: #333333;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 20px 0;
+            line-height: 1.3;
+            text-align: center;
+        }
+        
+        .benefits-list {
+            color: #555555;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .benefit-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eeeeee;
+        }
+        
+        .benefit-item:last-child {
+            border-bottom: none;
+        }
+        
+        .benefit-item strong {
+            color: #6366f1;
+        }
+        
+        .footer {
+            background-color: #333333;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .footer-title {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .footer-subtitle {
+            color: #cccccc;
+            font-size: 14px;
+            margin: 5px 0 20px 0;
+        }
+        
+        .footer-contact {
+            color: #cccccc;
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: center;
+            padding-bottom: 15px;
+        }
+        
+        .footer-contact p {
+            margin: 0 0 10px 0;
+        }
+        
+        .footer-contact p:last-child {
+            margin: 0;
+        }
+        
+        .footer-links {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid #555555;
+        }
+        
+        .footer-links p {
+            color: #999999;
+            font-size: 12px;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        .footer-links a {
+            color: #6366f1;
+            text-decoration: underline;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            
+            .header,
+            .main-content,
+            .features-section,
+            .benefits-section,
+            .footer {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+            
+            .features-grid {
+                display: block !important;
+            }
+            
+            .feature-item {
+                display: block !important;
+                width: 100% !important;
+                margin-bottom: 20px;
+            }
+            
+            .main-headline {
+                font-size: 24px !important;
+            }
+            
+            .greeting {
+                font-size: 20px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <table class="email-wrapper" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td align="center">
+                <table class="email-container" cellpadding="0" cellspacing="0" border="0">
+                    <!-- Header with Logo -->
+                    <tr>
+                        <td class="header">
+                            <div class="logo">
+                                PincodeAds
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Main Content -->
+                    <tr>
+                        <td class="main-content">
+                            <h2 class="greeting" id="shopkeeper-greeting">Welcome, ${name}</h2>
+                            <h1 class="main-headline">Ready to Grow Your Local Business?</h1>
+                            
+                            <div class="description">
+                                <p>Congratulations on joining PincodeAds! You're now part of India's most powerful hyperlocal advertising platform. We're excited to help you connect with customers right in your neighborhood and grow your business like never before.</p>
+                                <p>With PincodeAds, you can target specific pincodes, reach the right customers at the right time, and watch your business flourish in your local area. Your success story starts today!</p>
+                            </div>
+                            
+                            <div class="cta-section">
+                                <div class="cta-button">
+                                    <a href="#" id="campaign-link">Start Your First Campaign</a>
+                                </div>
+                            </div>
+                            
+                            <p class="support-text">Your dedicated account manager is ready to help you create winning campaigns that drive real results.</p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Features Section -->
+                    <tr>
+                        <td class="features-section">
+                            <h2 class="features-title">What You Can Achieve with PincodeAds</h2>
+                            
+                            <div class="features-grid">
+                                <div class="feature-item">
+                                    <div class="feature-icon target">🎯</div>
+                                    <h3 class="feature-title">Pincode Targeting</h3>
+                                    <p class="feature-description">Advertise to customers in specific pincodes where your business operates</p>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon campaign">📈</div>
+                                    <h3 class="feature-title">Smart Campaigns</h3>
+                                    <p class="feature-description">Create powerful ad campaigns that reach your ideal local customers</p>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon analytics">📊</div>
+                                    <h3 class="feature-title">Real-time Analytics</h3>
+                                    <p class="feature-description">Track performance, measure ROI, and optimize campaigns for better results</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Benefits Section -->
+                    <tr>
+                        <td class="benefits-section">
+                            <h2 class="benefits-title">Why Local Businesses Choose PincodeAds</h2>
+                            
+                            <div class="benefits-list">
+                                <div class="benefit-item">
+                                    <strong>✓ Hyperlocal Precision:</strong> Target customers within 1-5 km radius of your business
+                                </div>
+                                <div class="benefit-item">
+                                    <strong>✓ Cost-Effective:</strong> Pay only for ads shown to relevant local customers
+                                </div>
+                                <div class="benefit-item">
+                                    <strong>✓ Easy Setup:</strong> Launch your first campaign in under 10 minutes
+                                </div>
+                                <div class="benefit-item">
+                                    <strong>✓ Dedicated Support:</strong> Personal account manager to help you succeed
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td class="footer">
+                            <h3 class="footer-title">PincodeAds</h3>
+                            <p class="footer-subtitle">Your Local Advertising Partner</p>
+                            
+                            <div class="footer-contact">
+                                <p><strong>Business Support:</strong><br>
+                                Email: business@pincodeads.com<br>
+                                Phone: +91 (800) 123-4567</p>
+                                <p>We're here to make your business successful in your local market!</p>
+                            </div>
+                            
+                            <div class="footer-links">
+                                <p>You're now a PincodeAds business partner!<br>
+                                <a href="#" id="unsubscribe-link">Unsubscribe</a> | 
+                                <a href="#" id="privacy-link">Privacy Policy</a> | 
+                                <a href="#" id="business-support-link">Business Support</a></p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+</body>
+</html>

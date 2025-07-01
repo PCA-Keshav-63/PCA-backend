@@ -23,5 +23,8 @@ public class ProfileRequest {
 
     // @Builder.Default
     private String role = "USER"; // Default to USER if not provided
+    
+    private String phoneNumber;
+
 
 }

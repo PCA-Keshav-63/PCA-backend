@@ -40,25 +40,24 @@ public class SecurityConfig {
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtRequestFilter jwtRequestFilter) throws Exception {
-//        http cors(Customizer.withDefaults())
-//                .csrf(csrf -> csrf.disable)
-//                .authorizeHttpRequests(auth ->auth);
-        http.csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.disable())
-                
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/login", "/register", "/send-reset-otp", "/reset-password", "/logout", "/send-otp", "/verify-otp",
-                        "/api/categories", "/api/subcategories", "/services/search", "/services/autocomplete/**", "/services/create", "/services/{serviceId}/images").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/v3/api-docs/**", "/swagger-ui/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/v3/api-docs/**", "/swagger-ui/**").permitAll()
-                        .requestMatchers(HttpMethod.OPTIONS, "/**")
-                .permitAll().anyRequest().authenticated())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .logout(AbstractHttpConfigurer::disable)
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling(ex ->ex.authenticationEntryPoint(customAuthenticationEntryPoint));
-            return http.build();
-    }
+public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtRequestFilter jwtRequestFilter) throws Exception {
+    http
+        .csrf(csrf -> csrf.disable())
+        .cors(Customizer.withDefaults()) // <-- Enable CORS!
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/login", "/register", "/send-reset-otp", "/reset-password", "/logout", "/send-otp", "/verify-otp",
+                "/api/categories", "/api/subcategories", "/services/search", "/services/autocomplete/**", "/services/create", "/services/{serviceId}/images").permitAll()
+            .requestMatchers(HttpMethod.GET, "/v3/api-docs/**", "/swagger-ui/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/v3/api-docs/**", "/swagger-ui/**").permitAll()
+            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .anyRequest().authenticated()
+        )
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .logout(AbstractHttpConfigurer::disable)
+        .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+        .exceptionHandling(ex -> ex.authenticationEntryPoint(customAuthenticationEntryPoint));
+    return http.build();
+}
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -71,17 +70,22 @@ public class SecurityConfig {
     }
 
 
-    private CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:3000", "http://localhost:3001"));
-        config.setAllowedMethods(List.of("GET","POST","PUT","DELETE","PATCH","OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization","Cache-Control","Content-Type"));
-        config.setAllowCredentials(true);
+private CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration config = new CorsConfiguration();
+    config.setAllowedOrigins(List.of(
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "https://pincodeads.vercel.app" // <-- Add your Vercel frontend!
+    ));
+    config.setAllowedMethods(List.of("GET","POST","PUT","DELETE","PATCH","OPTIONS"));
+    config.setAllowedHeaders(List.of("Authorization","Cache-Control","Content-Type"));
+    config.setAllowCredentials(true);
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", config);
     return source;
-    }
+}
 
     @Bean
     public AuthenticationManager authenticationManager() 

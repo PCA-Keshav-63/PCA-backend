@@ -99,10 +99,11 @@ public class EmailService {
     }
 
 private String loadHtmlTemplate(String fileName) throws IOException {
-        ClassPathResource resource = new ClassPathResource("templates/" + fileName);
-        byte[] bytes = Files.readAllBytes(resource.getFile().toPath());
-        return new String(bytes, StandardCharsets.UTF_8);
+    ClassPathResource resource = new ClassPathResource("templates/" + fileName);
+    try (InputStream inputStream = resource.getInputStream()) {
+        return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
     }
+}
 
 
     public void sendResetOtpEmail(String toEmail, String name, String otp) {

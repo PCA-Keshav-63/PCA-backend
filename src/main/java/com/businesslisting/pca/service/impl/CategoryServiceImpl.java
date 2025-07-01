@@ -18,7 +18,7 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    @Cacheable(value = "categories")
+    // @Cacheable(value = "categories")
     public List<Category> getAllCategories() {
         System.out.println("⏳ Fetching categories from database...");
         return categoryRepository.findAll();

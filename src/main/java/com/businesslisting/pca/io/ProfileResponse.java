@@ -16,5 +16,6 @@ public class ProfileResponse {
     private String email;
     private Boolean isAccountVerified;
     public String role;
-    
+    private String phoneNumber;
+
 }

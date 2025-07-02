@@ -14,11 +14,17 @@ import java.io.IOException;
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+            AuthenticationException authException) throws IOException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json");
 
-        response.getWriter().write("{\"authenticated\":false,\"message\":\"User is not authenticated\"}");
+        String jwtError = (String) request.getAttribute("jwt_exception");
+        String message = "User is not authenticated";
+        if (jwtError != null) {
+            message = jwtError;
+        }
+
+        response.getWriter().write("{\"authenticated\":false,\"message\":\"" + message + "\"}");
     }
 }
-

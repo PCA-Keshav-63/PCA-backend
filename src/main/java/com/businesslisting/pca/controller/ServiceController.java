@@ -12,9 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-
 @RestController
-@RequestMapping("/services")
+@RequestMapping("/api/v1.0/services")
 @RequiredArgsConstructor
 public class ServiceController {
 
@@ -30,13 +29,13 @@ public class ServiceController {
     // return ResponseEntity.status(HttpStatus.CREATED).body("Service listed
     // successfully");
     // }
-@PostMapping("/create")
-public ResponseEntity<String> createService(
-        @CurrentSecurityContext(expression = "authentication?.name") String email,
-        @RequestBody CreateServiceRequest request) {
-    String serviceId = serviceService.createService(request, email);
-    return ResponseEntity.status(HttpStatus.CREATED).body(serviceId);
-}
+    @PostMapping("/create")
+    public ResponseEntity<String> createService(
+            @CurrentSecurityContext(expression = "authentication?.name") String email,
+            @RequestBody CreateServiceRequest request) {
+        String serviceId = serviceService.createService(request, email);
+        return ResponseEntity.status(HttpStatus.CREATED).body(serviceId);
+    }
 
     @PostMapping("/{serviceId}/images")
     public ResponseEntity<String> uploadImages(

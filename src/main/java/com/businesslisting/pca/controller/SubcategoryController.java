@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/subcategories")
+@RequestMapping("/api/v1.0/subcategories")
 @CrossOrigin // Optional: For local frontend to call this
 @RequiredArgsConstructor
 public class SubcategoryController {
@@ -20,4 +20,3 @@ public class SubcategoryController {
         return subcategoryService.getByCategoryId(categoryId);
     }
 }
-

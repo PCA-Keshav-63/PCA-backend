@@ -30,7 +30,7 @@ public class JwtUtil {
                 .setClaims(claims)
                 .setSubject(email)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 3600*1000*10))
+                .setExpiration(new Date(System.currentTimeMillis() + 15L * 24 * 60 * 60 * 1000)) // 15 days expiratio
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }

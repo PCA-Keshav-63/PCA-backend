@@ -36,14 +36,14 @@ public class AuthController {
     private final JwtUtil jwtUtil;
     private final ProfileService profileService;
 
-    @PostMapping("/login")
+    @PostMapping("/api/v1.0/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {
         System.out.println("Login request received: " + request);
         try {
             authenticate(request.getEmail(), request.getPassword());
             final UserDetails userDetails = appUserDetailsService.loadUserByUsername(request.getEmail());
             final String jwtToken = jwtUtil.generateToken(userDetails);
-            ResponseCookie cookie = ResponseCookie.from("jwt", jwtToken) 
+            ResponseCookie cookie = ResponseCookie.from("jwt", jwtToken)
                     .httpOnly(true)
                     .path("/")
                     .maxAge(Duration.ofDays(1))
@@ -80,13 +80,15 @@ public class AuthController {
         System.out.println("Authentication successful for user: " + email);
     }
 
-    @GetMapping("/is-authenticated")
+    @GetMapping("/api/v1.0/is-authenticated")
     public ResponseEntity<Boolean> isAuthenticated(
             @CurrentSecurityContext(expression = "authentication?.name") String email) {
         return ResponseEntity.ok(email != null);
     }
 
-    @PostMapping("/send-reset-otp")
+
+
+    @PostMapping("/api/v1.0/send-reset-otp")
     public void sendResetOtp(@RequestParam String email) {
         try {
             profileService.sendResetOtp(email);
@@ -95,7 +97,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/reset-password")
+    @PostMapping("/api/v1.0/reset-password")
     public void resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
         try {
             profileService.resetPassword(request.getEmail(), request.getOtp(), request.getNewPassword());
@@ -105,45 +107,43 @@ public class AuthController {
 
     }
 
-@PostMapping("/send-otp")
-public void sendVerifyOtp(@RequestBody Map<String, String> request) {
-    String email = request.get("email");
-    if (email == null || email.isBlank()) {
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is required");
+    @PostMapping("/api/v1.0/send-otp")
+    public void sendVerifyOtp(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        if (email == null || email.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is required");
+        }
+
+        System.out.println("📨 Sending OTP to: " + email);
+        try {
+            profileService.sendOtp(email);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
     }
 
-    System.out.println("📨 Sending OTP to: " + email);
-    try {
-        profileService.sendOtp(email);
-    } catch (Exception e) {
-        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+    @PostMapping("/api/v1.0/verify-otp")
+    public ResponseEntity<Map<String, Object>> verifyEmail(@RequestBody Map<String, Object> request) {
+        System.out.println("📨 Verify OTP request received: " + request);
+        String email = (String) request.get("email");
+        String otp = (String) request.get("otp");
+        System.out.println("📨 Verifying OTP for email: " + email + ", OTP: " + otp);
+        if (email == null || otp == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing details");
+        }
+
+        try {
+            profileService.verifyOtp(email, otp);
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("message", "OTP verified successfully");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
-}
 
-
-@PostMapping("/verify-otp")
-public ResponseEntity<Map<String, Object>> verifyEmail(@RequestBody Map<String, Object> request) {
-    System.out.println("📨 Verify OTP request received: " + request);
-    String email = (String) request.get("email");
-    String otp = (String) request.get("otp");
-    System.out.println("📨 Verifying OTP for email: " + email + ", OTP: " + otp);
-    if (email == null || otp == null) {
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing details");
-    }
-
-    try {
-        profileService.verifyOtp(email, otp);
-        Map<String, Object> response = new HashMap<>();
-        response.put("success", true);
-        response.put("message", "OTP verified successfully");
-        return ResponseEntity.ok(response);
-    } catch (Exception e) {
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-    }
-}
-
-
-    @PostMapping("/logout")
+    @PostMapping("/api/v1.0/logout")
     public ResponseEntity<?> logout() {
         ResponseCookie deleteCookie = ResponseCookie.from("jwt", "")
                 .httpOnly(true)

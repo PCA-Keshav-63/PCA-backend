@@ -26,15 +26,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private final AppUserDetailsService appUserDetailsService;
     private final JwtUtil jwtUtil;
 
-private static final List<String> PUBLIC_URLS = List.of(
-    "/login",
-    "/register",
-    "/send-reset-otp",
-    "/reset-password",
-    "/logout",
-    "/send-otp",
-    "/verify-otp"
-);
+    private static final List<String> PUBLIC_URLS = List.of(
+            "/login", "/register", "/send-reset-otp", "/reset-password", "/logout", "/send-otp", "/verify-otp",
+            "/categories", "/subcategories", "/services/search",
+            "/services/autocomplete", "/services/create", "/services/{serviceId}/images",
+            "/api/v1.0/login", "/api/v1.0/register", "/api/v1.0/send-reset-otp", "/api/v1.0/reset-password",
+            "/api/v1.0/logout", "/api/v1.0/send-otp", "/api/v1.0/verify-otp",
+            "/api/v1.0/categories", "/api/v1.0/subcategories", "/api/v1.0/services/search",
+            "/api/v1.0/services/autocomplete", "/api/v1.0/services/create", "/api/v1.0/services/{serviceId}/images", "/");
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -43,7 +42,10 @@ private static final List<String> PUBLIC_URLS = List.of(
         String path = request.getServletPath();
         System.out.println("🔍 JwtRequestFilter path: " + path);
 
-        if (PUBLIC_URLS.contains(path)) {
+        // Enhanced public URL check for wildcards
+        if (PUBLIC_URLS.stream().anyMatch(path::equals) ||
+                path.startsWith("/services/autocomplete") ||
+                path.startsWith("/api/v1.0/services/autocomplete")) {
             System.out.println(" Public URL – Skipping JWT check");
             filterChain.doFilter(request, response);
             return;
@@ -52,38 +54,45 @@ private static final List<String> PUBLIC_URLS = List.of(
         String jwt = null;
         String email = null;
 
-        // 1. Check the authorization Header
-        final String authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            jwt = authorizationHeader.substring(7);
-        }
+        try {
+            // 1. Check the authorization Header
+            final String authorizationHeader = request.getHeader("Authorization");
+            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+                jwt = authorizationHeader.substring(7);
+            }
 
-        // 2. If it is not found in the header. Check the cookies
-        if (jwt == null) {
-            Cookie[] cookies = request.getCookies();
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if ("jwt".equals(cookie.getName())) {
-                        jwt = cookie.getValue();
-                        break;
+            // 2. If it is not found in the header. Check the cookies
+            if (jwt == null) {
+                Cookie[] cookies = request.getCookies();
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if ("jwt".equals(cookie.getName())) {
+                            jwt = cookie.getValue();
+                            break;
+                        }
                     }
                 }
             }
-        }
 
-        // 3. Validate the token and set the security Context
-
-        if (jwt != null) {
-            email = jwtUtil.extractEmail(jwt);
-            if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = appUserDetailsService.loadUserByUsername(email);
-                if (jwtUtil.validateToken(jwt, userDetails)) {
-                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                            userDetails, null, userDetails.getAuthorities());
-                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            // 3. Validate the token and set the security Context
+            if (jwt != null) {
+                email = jwtUtil.extractEmail(jwt);
+                if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    UserDetails userDetails = appUserDetailsService.loadUserByUsername(email);
+                    if (jwtUtil.validateToken(jwt, userDetails)) {
+                        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                                userDetails, null, userDetails.getAuthorities());
+                        authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    }
                 }
             }
+        } catch (io.jsonwebtoken.ExpiredJwtException ex) {
+            request.setAttribute("jwt_exception", "Token expired");
+        } catch (io.jsonwebtoken.SignatureException ex) {
+            request.setAttribute("jwt_exception", "Invalid token signature");
+        } catch (Exception ex) {
+            request.setAttribute("jwt_exception", "Invalid token");
         }
 
         filterChain.doFilter(request, response);

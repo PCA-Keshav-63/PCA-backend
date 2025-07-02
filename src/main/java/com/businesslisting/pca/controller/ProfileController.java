@@ -40,8 +40,8 @@ public class ProfileController {
         return profileService.getProfile(email);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<?> root() {
-        return ResponseEntity.ok("API is running");
+    @GetMapping("/health")
+    public Map<String, String> health() {
+        return Map.of("status", "ok");
     }
 }

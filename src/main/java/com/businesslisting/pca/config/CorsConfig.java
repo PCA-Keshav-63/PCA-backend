@@ -12,7 +12,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Apply CORS to all endpoints
-                .allowedOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:8081", "https://pincodeads.vercel.app", "https://pca.pincodeads.com") // Replace with your frontend's actual URL(s)
+                .allowedOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:8081", "https://pincodeads.vercel.app", "https://pca.pincodeads.com","https://pinocodeads.com") // Replace with your frontend's actual URL(s)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allowed HTTP methods
                 .allowedHeaders("*") // Allow all headers from the client
                 .allowCredentials(true) // Allow sending cookies, authorization headers, etc.

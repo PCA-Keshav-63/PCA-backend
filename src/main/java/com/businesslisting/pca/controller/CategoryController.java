@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/v1.0/categories")
 @RequiredArgsConstructor
 @CrossOrigin // Allow requests from frontend (optional)
 public class CategoryController {

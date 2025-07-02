@@ -27,7 +27,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
 
     private static final List<String> PUBLIC_URLS = List.of(
-            "/login", "/register", "/send-reset-otp", "/reset-password", "/logout", "/send-otp", "/verify-otp",
+            "/login", "/health", "/register", "/send-reset-otp", "/reset-password", "/logout", "/send-otp", "/verify-otp",
             "/categories", "/subcategories", "/services/search",
             "/services/autocomplete", "/services/create", "/services/{serviceId}/images",
             "/api/v1.0/login", "/api/v1.0/register", "/api/v1.0/send-reset-otp", "/api/v1.0/reset-password",

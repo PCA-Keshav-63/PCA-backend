@@ -19,7 +19,7 @@ import com.businesslisting.pca.service.BusinessService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/businesses")
+@RequestMapping("/api/v1.0/businesses")
 @RequiredArgsConstructor
 public class BusinessController {
 

@@ -51,7 +51,7 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/","/login", "/register", "/send-reset-otp", "/reset-password", "/logout", "/send-otp",
+                                "/", "/health", "/login", "/register", "/send-reset-otp", "/reset-password", "/logout", "/send-otp",
                                 "/verify-otp",
                                 "/categories", "/subcategories", "/services/search",
                                 "/services/autocomplete/**", "/services/create", "/services/{serviceId}/images",

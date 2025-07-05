@@ -65,16 +65,14 @@ public class ServiceServiceImpl implements ServiceService {
     // }
     @Override
     public String createService(CreateServiceRequest req, String email) {
-        UserEntity user = userRepository.findByEmail(email).orElseThrow();
-        // Fetch business by ID from request (recommended), or fallback to owner's
-        // business
-        Business business;
-
-        business = businessRepository.findByOwner(user)
-                .orElseThrow(() -> new RuntimeException("Business not found for user"));
-
-        Category category = categoryRepository.findById(req.getCategoryId()).orElseThrow();
-        Subcategory subcategory = subcategoryRepository.findById(req.getSubcategoryId()).orElseThrow();
+        UserEntity user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+        Business business = businessRepository.findByOwner(user)
+                .orElseThrow(() -> new RuntimeException("Business not found for user: " + user.getId()));
+        Category category = categoryRepository.findById(req.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found with id: " + req.getCategoryId()));
+        Subcategory subcategory = subcategoryRepository.findById(req.getSubcategoryId())
+                .orElseThrow(() -> new RuntimeException("Subcategory not found with id: " + req.getSubcategoryId()));
 
         ServiceEntity service = new ServiceEntity();
         service.setTitle(req.getTitle());

@@ -52,7 +52,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/", "/health", "/login", "/register", "/send-reset-otp", "/reset-password", "/logout", "/send-otp",
-                                "/verify-otp",
+                                "/verify-otp","/api/v1.0/contact-us", "/api/v1.0/contact-us/**",
                                 "/categories", "/subcategories", "/services/search",
                                 "/services/autocomplete/**", "/services/create", "/services/{serviceId}/images",
                                 "/api/v1.0/login", "/api/v1.0/register", "/api/v1.0/send-reset-otp",

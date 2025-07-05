@@ -28,12 +28,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private static final List<String> PUBLIC_URLS = List.of(
             "/login", "/health", "/register", "/send-reset-otp", "/reset-password", "/logout", "/send-otp", "/verify-otp",
-            "/categories", "/subcategories", "/services/search",
+            "/categories", "/subcategories", "/services/search","/api/v1.0/contact-us", "/api/v1.0/contact-us/**",
             "/services/autocomplete", "/services/create", "/services/{serviceId}/images",
             "/api/v1.0/login", "/api/v1.0/register", "/api/v1.0/send-reset-otp", "/api/v1.0/reset-password",
             "/api/v1.0/logout", "/api/v1.0/send-otp", "/api/v1.0/verify-otp",
             "/api/v1.0/categories", "/api/v1.0/subcategories", "/api/v1.0/services/search",
-            "/api/v1.0/services/autocomplete", "/api/v1.0/services/create", "/api/v1.0/services/{serviceId}/images", "/");
+            "/api/v1.0/services/autocomplete", "/api/v1.0/services/{serviceId}/images", "/");
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

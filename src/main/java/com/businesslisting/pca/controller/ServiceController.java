@@ -33,6 +33,7 @@ public class ServiceController {
     public ResponseEntity<String> createService(
             @CurrentSecurityContext(expression = "authentication?.name") String email,
             @RequestBody CreateServiceRequest request) {
+                System.out.println("Email: " + email);
         String serviceId = serviceService.createService(request, email);
         return ResponseEntity.status(HttpStatus.CREATED).body(serviceId);
     }

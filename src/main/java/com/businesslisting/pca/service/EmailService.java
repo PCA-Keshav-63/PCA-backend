@@ -73,6 +73,33 @@ public class EmailService {
     @Value("${spring.mail.properties.mail.smtp.from}")
     private String fromEmail;
 
+    public void sendContactUsEmail(String name, String email, String subject, String messageBody) {
+    try {
+        System.out.println("Sending contact form email to: pincodeads@gmail.com");
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+        String htmlContent = """
+                <h3>New Contact Us Submission</h3>
+                <p><strong>Name:</strong> %s</p>
+                <p><strong>Email:</strong> %s</p>
+                <p><strong>Subject:</strong> %s</p>
+                <p><strong>Message:</strong><br>%s</p>
+                """.formatted(name, email, subject, messageBody.replace("\n", "<br>"));
+
+        helper.setFrom(fromEmail);
+        helper.setTo("pincodeads@gmail.com");
+        helper.setSubject("Contact Us Form: " + subject);
+        helper.setText(htmlContent, true); // HTML email
+
+        mailSender.send(message);
+        System.out.println("Contact form email sent to pincodeads@gmail.com");
+
+    } catch (MessagingException e) {
+        throw new RuntimeException("Failed to send contact form email", e);
+    }
+}
+
     public void sendWelcomeEmail(String toEmail, String name, String role) {
         try {
         

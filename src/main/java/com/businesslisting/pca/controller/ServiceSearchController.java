@@ -37,14 +37,14 @@ public class ServiceSearchController {
                 lat, lng, radiusKm);
     }
 
-    // @GetMapping("/nearby")
-    // public List<ServiceEntity> getNearbyServices(
-    // @RequestParam Double lat,
-    // @RequestParam Double lng,
-    // @RequestParam(defaultValue = "5") Double radiusKm
-    // ) {
-    // return serviceEntityRepository.findNearby(lat, lng, radiusKm);
-    // }
+    @GetMapping("/nearby")
+    public List<ServiceEntity> getNearbyServices(
+    @RequestParam Double lat,
+    @RequestParam Double lng,
+    @RequestParam(defaultValue = "5") Double radiusKm
+    ) {
+    return serviceEntityRepository.findNearby(lat, lng, radiusKm);
+    }
 
     @GetMapping("/autocomplete/{field}")
     public List<String> autocompleteField(@PathVariable String field, @RequestParam String query) {

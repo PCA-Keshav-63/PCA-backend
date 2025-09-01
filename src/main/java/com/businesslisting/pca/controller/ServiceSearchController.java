@@ -12,9 +12,11 @@ import java.util.List;
 @RequestMapping("/api/v1.0/services")
 @RequiredArgsConstructor
 public class ServiceSearchController {
-    private final ServiceSearchService searchService;
-    private final ServiceEntityRepository serviceEntityRepository; // <-- Add this line
 
+    private final ServiceSearchService searchService;
+    private final ServiceEntityRepository serviceEntityRepository;
+
+    // 🔍 General search endpoint
     @GetMapping("/search")
     public List<ServiceEntity> search(
             @RequestParam(required = false) String q,
@@ -30,24 +32,31 @@ public class ServiceSearchController {
             @RequestParam(required = false) String businessName,
             @RequestParam(required = false) Double lat,
             @RequestParam(required = false) Double lng,
-            @RequestParam(required = false) Double radiusKm) {
+            @RequestParam(required = false) Double radiusKm
+    ) {
         return searchService.search(
                 q, pincode, city, district, categoryId, subcategoryId,
                 categoryName, subcategoryName, keyword, title, businessName,
-                lat, lng, radiusKm);
+                lat, lng, radiusKm
+        );
     }
 
+    // 📍 Nearby services endpoint
     @GetMapping("/nearby")
     public List<ServiceEntity> getNearbyServices(
-    @RequestParam Double lat,
-    @RequestParam Double lng,
-    @RequestParam(defaultValue = "10") Double radiusKm
+            @RequestParam Double lat,
+            @RequestParam Double lng,
+            @RequestParam(defaultValue = "10") Double radiusKm
     ) {
-    return serviceEntityRepository.findNearby(lat, lng, radiusKm);
+        return serviceEntityRepository.findNearby(lat, lng, radiusKm);
     }
 
+    // ✨ Autocomplete endpoint
     @GetMapping("/autocomplete/{field}")
-    public List<String> autocompleteField(@PathVariable String field, @RequestParam String query) {
+    public List<String> autocompleteField(
+            @PathVariable String field,
+            @RequestParam String query
+    ) {
         return searchService.autocompleteField(field, query);
     }
 }

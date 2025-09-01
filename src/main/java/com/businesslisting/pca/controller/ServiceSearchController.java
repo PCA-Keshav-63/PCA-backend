@@ -41,7 +41,7 @@ public class ServiceSearchController {
     public List<ServiceEntity> getNearbyServices(
     @RequestParam Double lat,
     @RequestParam Double lng,
-    @RequestParam(defaultValue = "5") Double radiusKm
+    @RequestParam(defaultValue = "10") Double radiusKm
     ) {
     return serviceEntityRepository.findNearby(lat, lng, radiusKm);
     }
